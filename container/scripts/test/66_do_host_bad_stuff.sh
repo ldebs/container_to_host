@@ -6,6 +6,6 @@ EOF
 )
 
 echo 55 > $HOST_IN
-run_host "$host_error" || echo "Which order ?"
+run_host "$host_error" || log "Which order ?"
 echo 66 > $HOST_IN
 run_host "$host_error"
