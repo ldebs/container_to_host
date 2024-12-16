@@ -1,10 +1,11 @@
 CONTAINER_VALUE="from container"
 
 host_stuff=$(cat -v <<EOF
-  echo -e "Host $U$CONTAINER_VALUE$rU stuff..."
-  sleep 1
-  echo With some non blocking errors >&2
-  sleep 1
+  for i in 1 2 3; do
+    echo -e "Host $U$CONTAINER_VALUE$rU stuff \$i..."
+    if [ "\$((\$i%2))" = "0" ]; then echo "Non blocking error" >&2; fi
+    sleep 0.5
+  done
 EOF
 )
 
