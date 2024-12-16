@@ -1,15 +1,19 @@
+# Function for logging with colors
 log() {
   echo -e "$@"
 }
 
+# Function for logging debug messages
 logdebug() {
   log "${DC}$@$NC" >&2
 }
 
+# Function for logging error messages
 logerror() {
   log "$EC$@$NC" >&2
 }
 
+# Function for handling logs, either to a file or to standard output
 handle_log() {
   if [ "$LOG_FILE" != "" ]; then
     touch "$LOG_FILE"

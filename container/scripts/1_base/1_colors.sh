@@ -50,6 +50,8 @@ _c_brgb='48;5' # 'b'ackground 'rgb' colors
 _c_Urgb='48;5' # 'U'nderline 'rgb' colors
 # concat with ;r;g;b values
 
+# Colors used in this project
+
 N="$_cb$_c_r$_ce" # Reset to 'N'ormal color and mode
 NC="$_cb$_c_fd;$c_bd$_ce" # Reset to 'N'ormal color
 

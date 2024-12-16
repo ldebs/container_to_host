@@ -1,3 +1,4 @@
+# Function to log and run a command into the host
 run_host(){
   log "$HC#### $@$NC$I"
 
