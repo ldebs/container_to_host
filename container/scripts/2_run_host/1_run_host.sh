@@ -26,7 +26,7 @@ run_host(){
   export REPLY_ERR=$(cat $tmpErr)
   rm $tmpOut $tmpErr
   
-  log "$HC#### end status $status$N"
+  log "$HC#### end $status$N"
   sync
   return $status
 }
