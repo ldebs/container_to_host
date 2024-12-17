@@ -3,9 +3,11 @@ run_host(){
   log "$HC#### $@$NC$I"
 
   # Read from HOST_OUT and HOST_ERR in real-time
-  while true; do cat $HOST_OUT; done &
+  tmpOut=$(mktemp -u)
+  while true; do cat $HOST_OUT | tee -a $tmpOut; sync; done &
   opid=$!
-  while true; do cat $HOST_ERR >&2; done &
+  tmpErr=$(mktemp -u)
+  while true; do cat $HOST_ERR | tee -a $tmpErr >&2; sync; done &
   epid=$!
 
   # Send command to host
@@ -16,8 +18,13 @@ run_host(){
 
   # Kill and wait the read processes
   kill $opid $epid
-  wait $opid > /dev/null 2>&1
-  wait $epid > /dev/null 2>&1
+  wait $opid > /dev/null 2>&1 || true
+  wait $epid > /dev/null 2>&1 || true
+
+  # set the REPLY variables
+  export REPLY_OUT=$(cat $tmpOut)
+  export REPLY_ERR=$(cat $tmpErr)
+  rm $tmpOut $tmpErr
   
   log "$HC#### end status $status$N"
   sync

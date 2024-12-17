@@ -11,3 +11,4 @@ EOF
 
 run_host "$host_stuff"
 run_host "echo Done;echo ...almost >&2"
+log "Result: out=\"$REPLY_OUT\" err=\"$REPLY_ERR\""

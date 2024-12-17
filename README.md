@@ -41,6 +41,8 @@ Named pipes (`HOST_CMD`, `HOST_STS`, `HOST_OUT`, `HOST_ERR`) and `HOST_IN` file 
 
 Before executing host commands, the container process writes the expected input to the `HOST_IN` file and then calls the `run_host` function with the commands to be executed as arguments. This function starts two infinite loops to read from `HOST_OUT` and `HOST_ERR`, writing the received streams to stdout and stderr, respectively. It subsequently writes the commands to `HOST_CMD`. The function then waits for the status result on `HOST_STS`. Once the status is received, it kills the read loops and returns the status.
 
+The content of `stdout` and `stderr` produced by host commands can be retrieved via the `REPLY_OUT` and `REPLY_ERR` variables after executing the `run_host` function.
+
 ## Contributing
 
 - **How to Contribute**:
